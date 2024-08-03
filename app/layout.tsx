@@ -5,7 +5,10 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "The Podcast Platform"
+  title: "The Podcast Platform",
+  icons: {
+    icon: '/icons/logo.svg'
+  }
 };
 
 export default function RootLayout({
