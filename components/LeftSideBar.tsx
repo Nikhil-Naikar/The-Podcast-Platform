@@ -6,6 +6,7 @@ import React from 'react'
 import { sidebarLinks } from '@/constants'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { SignOutButton } from './SignOutButton'
 
 
 const LeftSideBar = () => {
@@ -30,6 +31,8 @@ const LeftSideBar = () => {
                     </Link>
                 )
             })}
+
+            <SignOutButton />
         </nav>
     </section>
   )
