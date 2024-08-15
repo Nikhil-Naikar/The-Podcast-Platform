@@ -11,7 +11,7 @@
 - ShadCN
 - Clerk
 - Convex
-- OpenAI
+- OpenAI (ChatGPT)
 
 ## Views 🧐
 **What a curious user who is not signed in would see:**
