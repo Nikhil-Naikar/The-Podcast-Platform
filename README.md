@@ -4,7 +4,7 @@
 
 ## Tech Stack 🧰
 - TypeScript
-- React.js
+- React
 - Next.js
 - Node.js
 - Tailwind CSS
