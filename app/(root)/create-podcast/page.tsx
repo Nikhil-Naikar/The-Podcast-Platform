@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
+import { Textarea } from "@/components/ui/textarea"
 
 const voiceCategories = ["alloy", "shimmer", "nova", "echo", "fable", "onyx"]
 
@@ -93,9 +94,22 @@ const CreatePodcast = () => {
                     />
                   )}
                 </Select>
-
             </div>
           </div>
+          <FormField
+              control={form.control}
+              name="podcastDescription"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-16 font-bold text-white-1">Description</FormLabel>
+                  <FormControl>
+                    <Textarea className="input-class focus-visible:ring-orange-1" placeholder="Episode # Cats are cool" {...field} />
+                  </FormControl>
+
+                  <FormMessage className="text-white-1" />
+                </FormItem>
+              )}
+            />
         </form>
       </Form>
     </section>
