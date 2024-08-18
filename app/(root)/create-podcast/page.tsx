@@ -14,7 +14,19 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { cn } from "@/lib/utils"
+import { useState } from "react"
+
+const voiceCategories = ["alloy", "shimmer", "nova", "echo", "fable", "onyx"]
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -23,8 +35,10 @@ const formSchema = z.object({
 })
 
 const CreatePodcast = () => {
+  const [voiceType, setVoiceType] = useState<string | null>(null)
+
    // 1. Define your form.
-   const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
@@ -38,27 +52,50 @@ const CreatePodcast = () => {
 
 
   return (
-    <section>
+    <section className="mt-10 flex flex-col">
       <h1 className='text-20 font-bold text-white-1'>Create Podcast</h1>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input placeholder="shadcn" {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="mt-12 flex w-full flex-col">
+          <div className="flex flex-col gap-[30px] border-b border-black-5 pb-10">
+            <FormField
+              control={form.control}
+              name="podcastTitle"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-16 font-bold text-white-1">Podcast Title</FormLabel>
+                  <FormControl>
+                    <Input className="input-class focus-visible:ring-orange-1" placeholder="Joe Rogan Podcast" {...field} />
+                  </FormControl>
+
+                  <FormMessage className="text-white-1" />
+                </FormItem>
+              )}
+            />
+            <div className="flex flex-col gap-2.5">
+                <Label className="text-16 font-bold text-white-1">
+                  Select AI Voice
+                </Label>
+                <Select onValueChange={(value) => setVoiceType(value)}>
+                  <SelectTrigger className={cn("text-16 w-ful bordern-none bg-black-1 text-gray-1")}>
+                    <SelectValue placeholder="Select AI Voice" className="placeholder:text-gray-1"/>
+                  </SelectTrigger>
+                  <SelectContent className="text-16 border-none bg-black-1 font-bold text-white-1 focus:ring-orange-1">
+                    {voiceCategories.map
+                    ((category) => (
+                      <SelectItem key={category} value={category} className="capitalize focus:bg-orange-1">{category}</SelectItem>
+                    ))}
+                  </SelectContent>
+                  {voiceType && (
+                    <audio
+                      src={`/${voiceType}.mp3`}
+                      autoPlay
+                      className="hidden"
+                    />
+                  )}
+                </Select>
+
+            </div>
+          </div>
         </form>
       </Form>
     </section>
