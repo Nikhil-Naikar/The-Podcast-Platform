@@ -95,8 +95,7 @@ const CreatePodcast = () => {
                   )}
                 </Select>
             </div>
-          </div>
-          <FormField
+            <FormField
               control={form.control}
               name="podcastDescription"
               render={({ field }) => (
@@ -110,6 +109,7 @@ const CreatePodcast = () => {
                 </FormItem>
               )}
             />
+          </div>
         </form>
       </Form>
     </section>
