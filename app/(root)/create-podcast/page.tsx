@@ -29,24 +29,38 @@ import { Textarea } from "@/components/ui/textarea"
 import GeneratePodcast from "@/components/GeneratePodcast"
 import GenerateThumbnail from "@/components/GenerateThumbnail"
 import { Loader } from "lucide-react"
+import { Id } from "@/convex/_generated/dataModel"
 
 const voiceCategories = ["alloy", "shimmer", "nova", "echo", "fable", "onyx"]
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  podcastTitle: z.string().min(2),
+  podcastDescription: z.string().min(2)
 })
 
 const CreatePodcast = () => {
+  const [imagePrompt, setImagePrompt] = useState<string>("");
+  const [imageStorageId, setImageStorageId] = useState<Id<"_storage"> | null>(null);
+
+  const [imageUrl, setImageUrl] = useState<string>("");
+
+  const [audioUrl, setAudioUrl] = useState<string>("");
+  const [audioStorageId, setAudioStorageId] = useState<Id<"_storage"> | null>(null);
+
+  const [audioDuration, setAudioDuration] = useState<number>(0);
+  
   const [voiceType, setVoiceType] = useState<string | null>(null);
+  const [voicePrompt, setVoicePrompt] = useState<string>("");
+
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  
 
    // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      podcastTitle: "",
+      podcastDescription: ""
     },
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -115,7 +129,15 @@ const CreatePodcast = () => {
             />
           </div>
           <div className="flex flex-col pt-10">
-            <GeneratePodcast />
+            <GeneratePodcast 
+              setAudioStorageId={setAudioStorageId}
+              setAudio={setAudioUrl}
+              voiceType={voiceType}
+              audio={audioUrl}
+              voicePrompt={voicePrompt}
+              setVoicePrompt={setVoicePrompt}
+              setAudioDuration={setAudioDuration} 
+            />
             <GenerateThumbnail />
 
             <div className="mt-10 w-full">
