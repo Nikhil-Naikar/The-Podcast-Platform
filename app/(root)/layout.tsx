@@ -2,6 +2,7 @@ import LeftSideBar from "@/components/LeftSideBar";
 import MobileNav from "@/components/MobileNav";
 import RightSideBar from "@/components/RightSideBar";
 import Image from "next/image";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
@@ -15,7 +16,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
                     <MobileNav/>
                   </div>
                   <div>
-                    Toaster (notification popups)
+                    <Toaster />
                     {children}
                   </div>
                 </div>

@@ -10,6 +10,7 @@ import { api } from "@/convex/_generated/api"
 import { v4 as uuidv4 } from "uuid";
 import { generateUploadUrl } from "@/convex/files"
 import { useUploadFiles } from "@xixixao/uploadstuff/lib/react"
+import { useToast } from "./ui/use-toast"
 
 const useGeneratePodcast = ({setAudio, voiceType, voicePrompt, setAudioStorageId}: GeneratePodcastProps) => {
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
@@ -20,12 +21,16 @@ const useGeneratePodcast = ({setAudio, voiceType, voicePrompt, setAudioStorageId
   const getPodcastAudio = useAction(api.openai.generateAudioAction); 
   const getAudioUrl = useMutation(api.podcasts.getUrl);
 
+  const { toast } = useToast();
+
   const generatePodcast = async () => {
     setIsGenerating(true);
     setAudio("");
 
     if(!voicePrompt){
-      // todo: show error message
+      toast({
+        title: "Need a voiceType to generate a podcast"
+      })
       return setIsGenerating(false);
     }
 
@@ -50,10 +55,17 @@ const useGeneratePodcast = ({setAudio, voiceType, voicePrompt, setAudioStorageId
       const audioUrl = await getAudioUrl({storageId});
       setAudio(audioUrl!);
       setIsGenerating(false);
-      
+
+      toast({
+        title: "Podcast generated successfully"
+      })
+
     } catch (error) {
       console.log("Error generating podcast", error);
-      // todo: show error message
+      toast({
+        title: "Error generating podcast",
+        variant: "destructive"
+      })
       setIsGenerating(false);
     }
 
