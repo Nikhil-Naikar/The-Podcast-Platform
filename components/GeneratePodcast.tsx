@@ -9,7 +9,7 @@ import { useAction, useMutation } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { v4 as uuidv4 } from "uuid";
 import { generateUploadUrl } from "@/convex/files"
-import { useUploadFiles } from "@xixixao/uploadstuff/lib/react"
+import { useUploadFiles } from "@xixixao/uploadstuff/react"
 import { useToast } from "./ui/use-toast"
 
 const useGeneratePodcast = ({setAudio, voiceType, voicePrompt, setAudioStorageId}: GeneratePodcastProps) => {
@@ -95,7 +95,7 @@ const GeneratePodcast = (props: GeneratePodcastProps) => {
         />
       </div>
       <div className="mt-5 w-full max-w-[200px]">
-        <Button type="submit" className="text-16 bg-orange-1 py-4 font-bold text-white-1">
+        <Button type="submit" className="text-16 bg-orange-1 py-4 font-bold text-white-1" onClick={generatePodcast}>
           {isGenerating ? (
             <>
               Generating
