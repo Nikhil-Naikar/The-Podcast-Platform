@@ -8,6 +8,9 @@ import { GenerateThumbnailProps } from "@/types";
 import { Loader } from "lucide-react";
 import Image from "next/image";
 import { useToast } from "./ui/use-toast";
+import { useMutation } from "convex/react";
+import { useUploadFiles } from "@xixixao/uploadstuff/react";
+import { api } from "@/convex/_generated/api";
 
 
 const GenerateThumbnail = ({ setImage, setImageStorageId, image, imagePrompt, setImagePrompt}: GenerateThumbnailProps) => {
@@ -16,11 +19,29 @@ const GenerateThumbnail = ({ setImage, setImageStorageId, image, imagePrompt, se
   const imageRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  const handleImage = async (blog: Blob, fileName: string) => {
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+  const { startUpload } = useUploadFiles(generateUploadUrl)
+  const getImageUrl = useMutation(api.podcasts.getUrl);
+
+  const handleImage = async (blob: Blob, fileName: string) => {
     setIsImageLoading(true);
     setImage("");
     
     try{
+      const file = new File([blob], fileName, { type: "image/png"});
+
+      // uploading file to convex
+      const uploaded = await startUpload([file]);
+      const storageId = (uploaded[0].response as any).storageId;
+
+      setImageStorageId(storageId);
+
+      const imageUrl = await getImageUrl({storageId});
+      setImage(imageUrl!);
+      setIsImageLoading(false);
+      toast({ 
+        title: "thumbnail generated successfully"
+      })
 
     }catch(error){
       console.log(error);
@@ -31,7 +52,29 @@ const GenerateThumbnail = ({ setImage, setImageStorageId, image, imagePrompt, se
     }
   }
   const generateImage = async () => {};
-  const uploadImage = async (e:React.ChangeEvent<HTMLInputElement>) => {};
+  const uploadImage = async (e:React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+
+    try{
+      const files = e.target.files;
+
+      if (!files){
+        return;
+      } else{
+        const file = files[0];
+        const blob = await file.arrayBuffer().then((ab) => new Blob([ab]));
+
+        handleImage(blob, file.name);
+      }
+
+    } catch(error){
+      console.log(error);
+      toast({ 
+        title: "error uploading image",
+        variant: "destructive"
+      })
+    }
+  };
 
   return (
     <>

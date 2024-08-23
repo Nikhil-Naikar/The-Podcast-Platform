@@ -41,7 +41,7 @@ const useGeneratePodcast = ({setAudio, voiceType, voicePrompt, setAudioStorageId
         input: voicePrompt
       })
       console.log("got reponse back from openai");
-      // saveing audio into file
+      // saving audio into file
       const blob = new Blob([response], { type: 'audio/mpeg' });
       const fileName = `podcast-${uuidv4()}.mp3`;
       const file = new File([blob], fileName, { type: "audio/mpeg"});
