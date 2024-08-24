@@ -107,10 +107,6 @@ const CreatePodcast = () => {
 
     } catch(error){
       console.log(error);
-      toast({ 
-        title: "error submitting form",
-        variant: "destructive"
-      })
       setIsSubmitting(false);
     }
   }
