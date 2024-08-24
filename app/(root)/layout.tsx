@@ -3,6 +3,7 @@ import MobileNav from "@/components/MobileNav";
 import RightSideBar from "@/components/RightSideBar";
 import Image from "next/image";
 import { Toaster } from "@/components/ui/toaster";
+import PodcastPlayer from "@/components/PodcastPlayer";
 
 export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
@@ -18,11 +19,13 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
                   <div>
                     <Toaster />
                     {children}
+
                   </div>
                 </div>
               </section>
             <RightSideBar/>
         </main>
+        <PodcastPlayer />
    </div>
   );
 }
