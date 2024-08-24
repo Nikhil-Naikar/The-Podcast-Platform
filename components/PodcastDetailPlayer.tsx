@@ -2,7 +2,7 @@
 
 const PodcastDetailPlayer = () => {
   return (
-    <div>
+    <div className="text-xl text-white-1">
       PodcastDetailPlayer
     </div>
   )
