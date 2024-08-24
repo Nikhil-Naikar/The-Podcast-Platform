@@ -1,11 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
+import { PodcastCardProps } from '@/types'
+import { useRouter } from 'next/navigation'
 
-const PodcastCard = (
-    {imgUrl, title, description, podcastId}: 
-    { 'imgUrl': string, 'description': string, 'title': string, 'podcastId': number}) => {
+const PodcastCard = ({imgUrl, title, description, podcastId}: PodcastCardProps) => {
+  const router = useRouter();
+  const handleViews = () => {
+    router.push(`/podcast/${podcastId}`, {
+        scroll: true
+    });
+  }
+
   return (
-    <div className='cursor-point'>
+    <div className='cursor-pointer' onClick={handleViews}>
         <figure className='flex flex-col gap-2'>
             <Image 
                 src={imgUrl}

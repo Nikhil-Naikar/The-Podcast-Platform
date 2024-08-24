@@ -52,6 +52,7 @@ const GenerateThumbnail = ({ setImage, setImageStorageId, image, imagePrompt, se
         title: "error generating thumbnail",
         variant: "destructive"
       })
+      setIsImageLoading(false);
     }
   }
   const generateImage = async () => {
@@ -60,13 +61,13 @@ const GenerateThumbnail = ({ setImage, setImageStorageId, image, imagePrompt, se
       const response = await handleGenerateThumbnail( {prompt:imagePrompt} );
       const blob = new Blob([response], {type: "image/png"});
       handleImage(blob, `thumbnail-${uuidv4()}`);
-      setIsImageLoading(false);
       } catch(error){
         console.log(error);
         toast({ 
           title: "error generating thumbnail",
           variant: "destructive"
         })
+        setIsImageLoading(false);
       }
   };
 
