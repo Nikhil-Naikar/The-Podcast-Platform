@@ -10,10 +10,14 @@ import { sidebarLinks } from "@/constants"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
+import { Button } from "./ui/button";
+import { SignedIn, SignedOut, useClerk } from "@clerk/nextjs";
 
 const MobileNav = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { signOut } = useClerk();
   
   return (
     <section>
@@ -42,7 +46,26 @@ const MobileNav = () => {
                   )
                 })}
               </nav>
+              
             </SheetClose>
+            <SignedOut>
+                <div className="flex-center w-full pb-14 max-lg:px-4 lg:pr-8">
+                  <SheetClose asChild>
+                    <Button asChild className="text-16 w-full bg-orange-1 font-extrabold">
+                        <Link href="/sign-in"> Sign in</Link>
+                    </Button>
+                  </SheetClose>
+                </div>
+              </SignedOut>
+              <SignedIn>
+                  <div className="flex-center w-full pb-14 max-lg:px-4 lg:pr-8">
+                    <SheetClose asChild>
+                      <Button className="text-16 w-full bg-orange-1 font-extrabold" onClick={() => signOut(() => router.push("/"))}>
+                          Log Out
+                      </Button>
+                    </SheetClose>
+                  </div>
+              </SignedIn>
           </div>
         </SheetContent>
       </Sheet>
