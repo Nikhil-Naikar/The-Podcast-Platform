@@ -12,7 +12,7 @@
 - ShadCN
 - Clerk
 - Convex
-- OpenAI (ChatGPT)
+- OpenAI generative AI models (TTS & DALL·E 3)
 
 ## Views 🧐
 **What a curious user who is not signed in would see:**
