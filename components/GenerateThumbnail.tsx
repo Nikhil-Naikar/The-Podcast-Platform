@@ -43,7 +43,7 @@ const GenerateThumbnail = ({ setImage, setImageStorageId, image, imagePrompt, se
       setImage(imageUrl!);
       setIsImageLoading(false);
       toast({ 
-        title: "thumbnail generated successfully"
+        title: "Thumbnail generated successfully"
       })
 
     }catch(error){

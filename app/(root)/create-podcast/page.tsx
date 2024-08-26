@@ -77,10 +77,6 @@ const CreatePodcast = () => {
 
       // checking if we have all required data
       if(!audioUrl || !imageUrl || !voiceType){
-        toast({ 
-          title: "Please generate audio and image, and select voice type",
-          variant: "destructive"
-        })
         setIsSubmitting(false);
         throw new Error("Please generate audio and image, and select voice type");
       }
@@ -106,7 +102,6 @@ const CreatePodcast = () => {
       router.push("/");
 
     } catch(error){
-      console.log(error);
       setIsSubmitting(false);
     }
   }

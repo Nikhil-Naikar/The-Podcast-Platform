@@ -57,13 +57,13 @@ const useGeneratePodcast = ({setAudio, voiceType, voicePrompt, setAudioStorageId
       setIsGenerating(false);
 
       toast({
-        title: "Podcast generated successfully"
+        title: "Audio clip generated successfully"
       })
 
     } catch (error) {
-      console.log("Error generating podcast", error);
+      console.log("Error generating audio", error);
       toast({
-        title: "Error generating podcast",
+        title: "Error generating audio",
         variant: "destructive"
       })
       setIsGenerating(false);
