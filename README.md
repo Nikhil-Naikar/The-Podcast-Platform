@@ -20,6 +20,8 @@
 
 **If the curious user tries to access any other page they will be prompted to sign in or sign up. This is the Sign In page:**
 ![Screenshot 2024-08-05 at 10 07 52 AM](https://github.com/user-attachments/assets/9c38b03d-c374-43ca-91a4-9b2e872ab8d7)
+
+**Sign Up:**
 ![Screenshot 2024-08-05 at 10 08 09 AM](https://github.com/user-attachments/assets/304a116a-b98a-4d9b-a218-eb825e93128c)
 
 **Homepage:**
