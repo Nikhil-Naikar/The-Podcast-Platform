@@ -18,7 +18,7 @@
 **What a curious user who is not signed in would see:**
 ![pp_0](https://github.com/user-attachments/assets/8952ce25-6489-49c8-b468-850a548c1020)
 
-**If the curious user tries to access any other page they will be prompted to sign in or sign up. This is the Sign In page:
+**If the curious user tries to access any other page they will be prompted to sign in or sign up. This is the Sign In page:**
 ![Screenshot 2024-08-05 at 10 07 52 AM](https://github.com/user-attachments/assets/9c38b03d-c374-43ca-91a4-9b2e872ab8d7)
 ![Screenshot 2024-08-05 at 10 08 09 AM](https://github.com/user-attachments/assets/304a116a-b98a-4d9b-a218-eb825e93128c)
 
