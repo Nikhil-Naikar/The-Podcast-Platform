@@ -1,4 +1,4 @@
-# The Podcast Platform - Progress so far
+# The Podcast Platform 
 
 ![pp_0](https://github.com/user-attachments/assets/a3f08896-dadd-486a-bce9-ac0764542dee)
 
