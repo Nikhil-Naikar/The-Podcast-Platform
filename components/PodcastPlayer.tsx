@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { useAudio } from "@/providers/AudioProvider";
 
 import { Progress } from "./ui/progress";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 const PodcastPlayer = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -95,92 +94,88 @@ const PodcastPlayer = () => {
   };
 
   return (
-    <>
-      <SignedIn>
-        <div
-          className={cn("sticky bottom-0 left-0 flex size-full flex-col", {
-            hidden: !audio?.audioUrl || audio?.audioUrl === "",
-          })}
-        >
-          {/* change the color for indicator inside the Progress component in ui folder */}
-          <Progress
-            value={(currentTime / duration) * 100}
-            className="w-full"
-            max={duration}
-          />
-          <section className="glassmorphism-black flex h-[112px] w-full items-center justify-between px-4 max-md:justify-center max-md:gap-5 md:px-12">
-            <audio
-              ref={audioRef}
-              src={audio?.audioUrl}
-              className="hidden"
-              onLoadedMetadata={handleLoadedMetadata}
-              onEnded={handleAudioEnded}
+    <div
+      className={cn("sticky bottom-0 left-0 flex size-full flex-col", {
+        hidden: !audio?.audioUrl || audio?.audioUrl === "",
+      })}
+    >
+      {/* change the color for indicator inside the Progress component in ui folder */}
+      <Progress
+        value={(currentTime / duration) * 100}
+        className="w-full"
+        max={duration}
+      />
+      <section className="glassmorphism-black flex h-[112px] w-full items-center justify-between px-4 max-md:justify-center max-md:gap-5 md:px-12">
+        <audio
+          ref={audioRef}
+          src={audio?.audioUrl}
+          className="hidden"
+          onLoadedMetadata={handleLoadedMetadata}
+          onEnded={handleAudioEnded}
+        />
+        <div className="flex items-center gap-4 max-md:hidden">
+          <Link href={`/podcast/${audio?.podcastId}`}>
+            <Image
+              src={audio?.imageUrl! || "/images/player1.png"}
+              width={64}
+              height={64}
+              alt="player1"
+              className="aspect-square rounded-xl"
             />
-            <div className="flex items-center gap-4 max-md:hidden">
-              <Link href={`/podcast/${audio?.podcastId}`}>
-                <Image
-                  src={audio?.imageUrl! || "/images/player1.png"}
-                  width={64}
-                  height={64}
-                  alt="player1"
-                  className="aspect-square rounded-xl"
-                />
-              </Link>
-              <div className="flex w-[160px] flex-col">
-                <h2 className="text-14 truncate font-semibold text-white-1">
-                  {audio?.title}
-                </h2>
-                <p className="text-12 font-normal text-white-2">{audio?.author}</p>
-              </div>
-            </div>
-            <div className="flex-center cursor-pointer gap-3 md:gap-6">
-              <div className="flex items-center gap-1.5">
-                <Image
-                  src={"/icons/reverse.svg"}
-                  width={24}
-                  height={24}
-                  alt="rewind"
-                  onClick={rewind}
-                />
-                <h2 className="text-12 font-bold text-white-4">-5</h2>
-              </div>
-              <Image
-                src={isPlaying ? "/icons/Pause.svg" : "/icons/Play.svg"}
-                width={30}
-                height={30}
-                alt="play"
-                onClick={togglePlayPause}
-              />
-              <div className="flex items-center gap-1.5">
-                <h2 className="text-12 font-bold text-white-4">+5</h2>
-                <Image
-                  src={"/icons/forward.svg"}
-                  width={24}
-                  height={24}
-                  alt="forward"
-                  onClick={forward}
-                />
-              </div>
-            </div>
-            <div className="flex items-center gap-6">
-              <h2 className="text-16 font-normal text-white-2 max-md:hidden">
-                {formatTime(duration)}
-              </h2>
-              <div className="flex w-full gap-2">
-                <Image
-                  src={isMuted ? "/icons/unmute.svg" : "/icons/mute.svg"}
-                  width={24}
-                  height={24}
-                  alt="mute unmute"
-                  onClick={toggleMute}
-                  className="cursor-pointer"
-                />
-              </div>
-            </div>
-          </section>
+          </Link>
+          <div className="flex w-[160px] flex-col">
+            <h2 className="text-14 truncate font-semibold text-white-1">
+              {audio?.title}
+            </h2>
+            <p className="text-12 font-normal text-white-2">{audio?.author}</p>
+          </div>
         </div>
-      </SignedIn>
-    </>
+        <div className="flex-center cursor-pointer gap-3 md:gap-6">
+          <div className="flex items-center gap-1.5">
+            <Image
+              src={"/icons/reverse.svg"}
+              width={24}
+              height={24}
+              alt="rewind"
+              onClick={rewind}
+            />
+            <h2 className="text-12 font-bold text-white-4">-5</h2>
+          </div>
+          <Image
+            src={isPlaying ? "/icons/Pause.svg" : "/icons/Play.svg"}
+            width={30}
+            height={30}
+            alt="play"
+            onClick={togglePlayPause}
+          />
+          <div className="flex items-center gap-1.5">
+            <h2 className="text-12 font-bold text-white-4">+5</h2>
+            <Image
+              src={"/icons/forward.svg"}
+              width={24}
+              height={24}
+              alt="forward"
+              onClick={forward}
+            />
+          </div>
+        </div>
+        <div className="flex items-center gap-6">
+          <h2 className="text-16 font-normal text-white-2 max-md:hidden">
+            {formatTime(duration)}
+          </h2>
+          <div className="flex w-full gap-2">
+            <Image
+              src={isMuted ? "/icons/unmute.svg" : "/icons/mute.svg"}
+              width={24}
+              height={24}
+              alt="mute unmute"
+              onClick={toggleMute}
+              className="cursor-pointer"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
