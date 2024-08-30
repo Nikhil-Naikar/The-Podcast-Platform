@@ -15,7 +15,7 @@ const LeftSideBar = () => {
     const pathname = usePathname();
     const router = useRouter();
     const { signOut } = useClerk();
-    const { audio } = useAudio();
+    const { audio, setAudio } = useAudio();
     
   return (
     <section className={cn("left_sidebar h-[calc(100vh-5px)]", {
@@ -47,7 +47,10 @@ const LeftSideBar = () => {
         </SignedOut>
         <SignedIn>
             <div className="flex-center w-full pb-14 max-lg:px-4 lg:pr-8">
-                <Button className="text-16 w-full bg-orange-1 font-extrabold" onClick={() => signOut(() => router.push("/"))}>
+                <Button className="text-16 w-full bg-orange-1 font-extrabold" onClick={() => {
+                                                                                                setAudio(undefined); // Clear the audio
+                                                                                                signOut(() => router.push("/")); // Sign out and navigate to the homepage
+                                                                                                }}>
                     Log Out
                 </Button>
             </div>
