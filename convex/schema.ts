@@ -24,7 +24,7 @@ export default defineSchema({
     .searchIndex('search_body', { searchField: 'podcastDescription' }),
   users: defineTable({
     email: v.string(),
-    imageUrl: v.string(),
+    imageUrl: v.optional(v.string()),
     clerkId: v.string(),
     name: v.string(),
   })

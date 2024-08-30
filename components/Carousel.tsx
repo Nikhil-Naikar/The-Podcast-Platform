@@ -48,7 +48,7 @@ const EmblaCarousel = ({ fansLikeDetail }: CarouselProps) => {
             onClick={() => router.push(`/podcast/${item.podcast[0]?.podcastId}`)}
           >
             <Image 
-              src={item.imageUrl}
+              src={item.imageUrl!}
               alt="card"
               fill
               className="absolute size-full rounded-xl border-none"

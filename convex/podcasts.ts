@@ -47,7 +47,7 @@ export const createPodcast = mutation({
       imagePrompt: args.imagePrompt,
       voiceType: args.voiceType,
       views: args.views,
-      authorImageUrl: user[0].imageUrl,
+      authorImageUrl: user[0].imageUrl!,
       audioDuration: args.audioDuration,
     });
   },

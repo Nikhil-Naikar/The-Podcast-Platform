@@ -15,7 +15,7 @@ export interface TopPodcastersProps {
   _id: Id<"users">;
   _creationTime: number;
   email: string;
-  imageUrl: string;
+  imageUrl?: string | undefined;
   clerkId: string;
   name: string;
   podcast: {
